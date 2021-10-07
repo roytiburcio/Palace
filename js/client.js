@@ -89,7 +89,9 @@ const drawType = {
 
 let net;
 if (window.require) {
-	net = require('net');
+	net = window.require('net');
+} else {
+  console.log("There was no window.require");
 }
 
 
@@ -1172,7 +1174,7 @@ class PalaceClient extends PalaceProtocol {
 			version = '0.0.6';
 
 		if (window.require) {
-			remote = require('electron').remote;
+			remote = require('@electron/remote');
 			MenuItem = remote.MenuItem;
 			Menu = remote.Menu;
 			version = remote.app.getVersion();

@@ -5,7 +5,7 @@
     "description": "Palace visual chat app",
     "main": "main.js",
     "scripts": {
-        "start": "electron .",
+        "start": "electron . --verbose",
         "rebuild": "$(npm bin)/electron-rebuild",
         "rebuild-win32": ".\\node_modules\\.bin\\electron-rebuild.cmd",
         "build": "electron-packager . Palace --overwrite --ignore=\"(\\.gitignore|.*/test|node_modules/@paulcbetts/cld/deps)\" --prune --out=release-builds",
@@ -14,13 +14,13 @@
     "author": "Jameson Heesen",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^9.1.0",
+        "electron": "^15.1.1",
         "electron-packager": "^13.0.1",
         "electron-rebuild": "^1.8.2",
         "flow-bin": "^0.90.0"
     },
     "dependencies": {
-        "electron-spellchecker": "^1.1.2",
+        "@electron/remote": "^2.0.1",
         "node-abi": "^2.4.4"
     }
 }

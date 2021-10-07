@@ -6,25 +6,6 @@ var logField = document.getElementById('log'),
 	viewScaleTimer = null,
 	keysDown = [];
 
-if (window.require) {
-	//import {SpellCheckHandler, ContextMenuListener, ContextMenuBuilder} from 'electron-spellchecker';
-	const electronSpellchecker = require('electron-spellchecker');
-	const SpellCheckHandler = electronSpellchecker.SpellCheckHandler;
-	const ContextMenuListener = electronSpellchecker.ContextMenuListener;
-	const ContextMenuBuilder = electronSpellchecker.ContextMenuBuilder;
-	window.spellCheckHandler = new SpellCheckHandler();
-	window.spellCheckHandler.attachToInput();
-	window.spellCheckHandler.switchLanguage(navigator.language); // Start off as "US English, America" ...maybe use navigator.language
-	let contextMenuBuilder = new ContextMenuBuilder(window.spellCheckHandler,null,true);
-	// Add context menu listener
-	let contextMenuListener = new ContextMenuListener((info) => {
-		contextMenuBuilder.showPopupMenu(info);
-	});
-}
-
-
-
-
 (function () { // setup
 
 	// certain elements shouldn't accept focus!

@@ -18,13 +18,20 @@ function createWindow () {
     let display = screen.getPrimaryDisplay();
     let area = display.workArea;
 
-
+  // Initialize remote. Should be removed though.
+  require('@electron/remote/main').initialize();
 
   // Create the browser window.
   win = new BrowserWindow({width: area.width, height: area.height,webPreferences: {
-    nativeWindowOpen: true
+    nativeWindowOpen: true,
+    nodeIntegration: true,
+    contextIsolation: false,
+    enableRemoteModule: true,
+    spellcheck: true
   }});
+  require("@electron/remote/main").enable(win.webContents);
   win.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
+
       event.preventDefault()
       Object.assign(options, {
         parent: win,
@@ -32,7 +39,8 @@ function createWindow () {
         height: 500,
         webPreferences: {
             javascript: true,
-            nodeIntegration: false
+            nodeIntegration: false,
+            spellcheck: true
         }
       })
       event.newGuest = new BrowserWindow(options)
@@ -49,7 +57,7 @@ function createWindow () {
   }));
 
   // Open the DevTools.
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
