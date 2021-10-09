@@ -12,3 +12,6 @@ npm-debug.log
 
 # release
 /release-builds
+
+# Workspace files
+*.code-workspace
