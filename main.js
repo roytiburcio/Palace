@@ -1,4 +1,4 @@
-const {app, Menu, BrowserWindow} = require('electron');
+const {app, Menu, BrowserWindow, HandlerDetails} = require('electron');
 const path = require('path');
 const url = require('url');
 const os = require('os');
@@ -30,23 +30,21 @@ function createWindow () {
     spellcheck: true
   }});
   require("@electron/remote/main").enable(win.webContents);
-  win.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
-
-      event.preventDefault()
-      Object.assign(options, {
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    return {
+      action: "allow",
+      overrideBrowserWindowOptions: {
         parent: win,
         width: 500,
         height: 500,
         webPreferences: {
-            javascript: true,
-            nodeIntegration: false,
-            spellcheck: true
+          javascript: true,
+          nodeIntegration: false,
+          spellcheck: true
         }
-      })
-      event.newGuest = new BrowserWindow(options)
-      event.newGuest.maximize()
-  })
-
+      }
+    };
+  });
   win.maximize();
 
   // and load the index.html of the app.
