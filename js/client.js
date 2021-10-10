@@ -1137,7 +1137,11 @@ class PalaceProtocol {
 		reg.setInt32(96,0x00011940);
 		reg.setInt32(100,0x00011940);
 		reg.setInt32(104,0x00011940);
-		//reg.setInt16(108); //optional room ID to land in (if server allows it,0)
+
+		if (!isNaN(prefs.general.room)) {
+		  reg.setInt16(108, parseInt(prefs.general.room)); //optional room ID to land in (if server allows it,0)
+		}
+
 		reg.set(this.textEncoder.encode(this.clientVersion),110);
 
 		reg.setInt32(120,0x00000041);
@@ -1315,6 +1319,9 @@ class PalaceClient extends PalaceProtocol {
 	goto(url) {
 		var connectInfo = url.trim().replace('palace://','').split(':'); //should use forgiving regex
 		this.retryRegistration = false;
+
+		// First look for /palace.json for an indirect connection. Otherwise, assume we're connecting 
+		// directly to the palace server.
 		httpGetAsync(
 			'http://' + connectInfo[0] + '/palace.json',
 			'json',

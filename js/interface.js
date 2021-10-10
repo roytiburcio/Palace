@@ -366,6 +366,12 @@ var logField = document.getElementById('log'),
 	document.getElementById('prefhomepalace').onchange = function() {
 		setGeneralPref('home',this.value);
 	};
+	document.getElementById('prefhomepalaceroom').onchange = function() {
+		if (isNaN(this.value)) {
+			setGeneralPref('room',''); // Room input wouldn't parse to int, fill with safe empty
+		}
+		setGeneralPref('room',this.value);
+	};
 	document.getElementById('prefpropbagsize').oninput = function() { // change prop bag tile size :D
 		setGeneralPref('propBagTileSize',this.value);
 		refreshPropBagView(true);

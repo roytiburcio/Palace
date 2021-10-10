@@ -66,4 +66,5 @@ window.onunload = function(e) {
 	}
 	document.getElementById('prefusername').value = getGeneralPref('userName');
 	document.getElementById('prefhomepalace').value = getGeneralPref('home');
+	document.getElementById('prefhomepalaceroom').value = getGeneralPref('room');
 })();
